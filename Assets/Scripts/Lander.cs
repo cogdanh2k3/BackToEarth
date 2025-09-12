@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class Lander : MonoBehaviour
 {
+    private const float GRAVITY_NORMAL = 0.7f;
+
     public static Lander instance { get; private set; }
 
     public event EventHandler OnLeftForce;
@@ -11,64 +13,128 @@ public class Lander : MonoBehaviour
     public event EventHandler OnRightForce;
     public event EventHandler OnBeforeForce;
     public event EventHandler OnCoinPickup;
+    public event EventHandler<OnStateChangedEventArgs> OnStateChanged;
+
+    public class OnStateChangedEventArgs: EventArgs
+    {
+        public State state;
+    }
     public event EventHandler<OnLandedEventArgs> OnLanded;
 
     public class OnLandedEventArgs : EventArgs
     {
+        public LandingType landingType;
         public int score;
+        public int scoreMultiplier;
+        public float landingSpeed;
+        public float landingAngle;
+    }
+
+    public enum LandingType
+    {
+        Success,
+        WrongArea,
+        TooSteep,
+        TooFast
+    }
+
+    public enum State
+    {
+        WaitingForStart,
+        Normal,
+        GameOver
     }
 
     private Rigidbody2D landerRigidbody2D;
-    private float fuelAmount = 10f;
+    private float fuelAmount;
+    private float fuelAmountMax = 10f;
+    private State state;
+
     private void Awake()
     {
         instance = this;
+
+        fuelAmount = fuelAmountMax;
         landerRigidbody2D = GetComponent<Rigidbody2D>();
+        landerRigidbody2D.gravityScale = 0f;
     }
     private void FixedUpdate()
     {
         OnBeforeForce?.Invoke(this, EventArgs.Empty);
 
-        if(fuelAmount <= 0)
+        switch (state)
         {
-            return;
+            default:
+            case State.WaitingForStart:
+                if (Keyboard.current.upArrowKey.isPressed ||
+                    Keyboard.current.leftArrowKey.isPressed ||
+                    Keyboard.current.rightArrowKey.isPressed)
+                {
+                    // Press
+                    landerRigidbody2D.gravityScale = GRAVITY_NORMAL;
+                    SetState(State.Normal);
+                }
+                break;
+            case State.Normal:
+                if (fuelAmount <= 0)
+                {
+                    return;
+                }
+
+                if (Keyboard.current.upArrowKey.isPressed ||
+                    Keyboard.current.leftArrowKey.isPressed ||
+                    Keyboard.current.rightArrowKey.isPressed)
+                {
+                    ConsumeFuel();
+                }
+
+                if (Keyboard.current.upArrowKey.isPressed)
+                {
+                    float force = 700f;
+                    landerRigidbody2D.AddForce(force * transform.up * Time.deltaTime);
+                    OnUpForce?.Invoke(this, EventArgs.Empty);
+                }
+                if (Keyboard.current.leftArrowKey.isPressed)
+                {
+                    float turnSpeed = +100f;
+                    landerRigidbody2D.AddTorque(turnSpeed * Time.deltaTime);
+                    OnLeftForce?.Invoke(this, EventArgs.Empty);
+
+                }
+                if (Keyboard.current.rightArrowKey.isPressed)
+                {
+                    float turnSpeed = -100f;
+                    landerRigidbody2D.AddTorque(turnSpeed * Time.deltaTime);
+                    OnRightForce?.Invoke(this, EventArgs.Empty);
+
+                }
+                break;
+            case State.GameOver:
+                break;
         }
 
-        if (Keyboard.current.upArrowKey.isPressed ||
-            Keyboard.current.leftArrowKey.isPressed ||
-            Keyboard.current.rightArrowKey.isPressed)
-        {
-            ConsumeFuel();
-        }
+        
 
-        if (Keyboard.current.upArrowKey.isPressed)
-        {
-            float force = 700f;
-            landerRigidbody2D.AddForce(force * transform.up * Time.deltaTime);
-            OnUpForce?.Invoke(this, EventArgs.Empty);
-        }
-        if (Keyboard.current.leftArrowKey.isPressed)
-        {
-            float turnSpeed = +100f;
-            landerRigidbody2D.AddTorque(turnSpeed * Time.deltaTime);
-            OnLeftForce?.Invoke(this, EventArgs.Empty);
-
-        }
-        if (Keyboard.current.rightArrowKey.isPressed)
-        {
-            float turnSpeed = -100f;
-            landerRigidbody2D.AddTorque(turnSpeed * Time.deltaTime);
-            OnRightForce?.Invoke(this, EventArgs.Empty);
-
-        }
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision2D)
     {
-        if(!collision2D.gameObject.TryGetComponent(out LandingPan landingPan))
+        if (!collision2D.gameObject.TryGetComponent(out LandingPan landingPan))
         {
             Debug.Log("Crashed on the Terrain!");
+
+            OnLanded?.Invoke(this, new OnLandedEventArgs
+            {
+                landingType = LandingType.WrongArea,
+                score = 0,
+                scoreMultiplier = 0,
+                landingSpeed = 0,
+                landingAngle = 0
+            });
+            SetState(State.GameOver);
             return;
+
         }
 
         float softLandingVelocityMagnitude = 4f;
@@ -76,15 +142,32 @@ public class Lander : MonoBehaviour
         if (relativeVelocityMagnitude > softLandingVelocityMagnitude)
         {
             Debug.Log("Landed too hard!");
+            OnLanded?.Invoke(this, new OnLandedEventArgs
+            {
+                landingType = LandingType.TooFast,
+                score = 0,
+                scoreMultiplier = 0,
+                landingSpeed = relativeVelocityMagnitude,
+                landingAngle = 0
+            });
+            SetState(State.GameOver);
             return;
         }
 
         float dotProduct = Vector2.Dot(Vector2.up, transform.up);
         float minDotProduct = 0.9f;
 
-        if(dotProduct < minDotProduct)
+        if (dotProduct < minDotProduct)
         {
             Debug.Log("Landed on a too steep angle!");
+            OnLanded?.Invoke(this, new OnLandedEventArgs
+            {
+                landingType = LandingType.TooSteep,
+                score = 0,
+                scoreMultiplier = 0,
+                landingSpeed = relativeVelocityMagnitude,
+                landingAngle = dotProduct
+            });
             return;
         }
 
@@ -105,16 +188,27 @@ public class Lander : MonoBehaviour
 
         OnLanded?.Invoke(this, new OnLandedEventArgs
         {
-            score = score
+            landingType = LandingType.Success,
+            score = score,
+            scoreMultiplier = landingPan.GetScoreMultiplier(),
+            landingSpeed = relativeVelocityMagnitude,
+            landingAngle = dotProduct
         });
+
+        SetState(State.GameOver);
+
     }
 
     private void OnTriggerEnter2D(Collider2D collider2D)
     {
-        if(collider2D.gameObject.TryGetComponent(out FuelPickup fuelPickup))
+        if (collider2D.gameObject.TryGetComponent(out FuelPickup fuelPickup))
         {
             float addFuelAmount = 10f;
             fuelAmount += addFuelAmount;
+            if (fuelAmount >= fuelAmountMax)
+            {
+                fuelAmount = fuelAmountMax;
+            }
             fuelPickup.DestroySelf();
         }
 
@@ -125,12 +219,34 @@ public class Lander : MonoBehaviour
         }
     }
 
+    private void SetState(State state)
+    {
+        this.state = state;
+        OnStateChanged?.Invoke(this, new OnStateChangedEventArgs
+        {
+            state = state
+        });
+    }
+
     private void ConsumeFuel()
     {
         float fuelConsumptionAmount = 1f;
         fuelAmount -= fuelConsumptionAmount * Time.deltaTime;
     }
 
+    public float GetFuelAmountNormalized()
+    {
+        return fuelAmount / fuelAmountMax;
+    }
 
+    public float GetSpeedX()
+    {
+        return landerRigidbody2D.linearVelocityX;
+    }
+
+    public float GetSpeedY()
+    {
+        return landerRigidbody2D.linearVelocityY;
+    }
 
 }
