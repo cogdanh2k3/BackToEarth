@@ -66,9 +66,10 @@ public class Lander : MonoBehaviour
         {
             default:
             case State.WaitingForStart:
-                if (Keyboard.current.upArrowKey.isPressed ||
-                    Keyboard.current.leftArrowKey.isPressed ||
-                    Keyboard.current.rightArrowKey.isPressed)
+                if (GameInput.instance.isUpActionPressed()||
+                    GameInput.instance.isRightActionPressed() ||
+                    GameInput.instance.isLeftActionPressed() ||
+                    GameInput.instance.GetMovementInputVector2() != Vector2.zero)
                 {
                     // Press
                     landerRigidbody2D.gravityScale = GRAVITY_NORMAL;
@@ -81,27 +82,29 @@ public class Lander : MonoBehaviour
                     return;
                 }
 
-                if (Keyboard.current.upArrowKey.isPressed ||
-                    Keyboard.current.leftArrowKey.isPressed ||
-                    Keyboard.current.rightArrowKey.isPressed)
+                if (GameInput.instance.isUpActionPressed() ||
+                    GameInput.instance.isRightActionPressed() ||
+                    GameInput.instance.isLeftActionPressed() ||
+                    GameInput.instance.GetMovementInputVector2() != Vector2.zero)
                 {
                     ConsumeFuel();
                 }
 
-                if (Keyboard.current.upArrowKey.isPressed)
+                float gamePadDeadZone = .4f;
+                if (GameInput.instance.isUpActionPressed() || GameInput.instance.GetMovementInputVector2().y > gamePadDeadZone)
                 {
                     float force = 700f;
                     landerRigidbody2D.AddForce(force * transform.up * Time.deltaTime);
                     OnUpForce?.Invoke(this, EventArgs.Empty);
                 }
-                if (Keyboard.current.leftArrowKey.isPressed)
+                if (GameInput.instance.isLeftActionPressed() || GameInput.instance.GetMovementInputVector2().x < -gamePadDeadZone)
                 {
                     float turnSpeed = +100f;
                     landerRigidbody2D.AddTorque(turnSpeed * Time.deltaTime);
                     OnLeftForce?.Invoke(this, EventArgs.Empty);
 
                 }
-                if (Keyboard.current.rightArrowKey.isPressed)
+                if (GameInput.instance.isRightActionPressed() || GameInput.instance.GetMovementInputVector2().x > gamePadDeadZone)
                 {
                     float turnSpeed = -100f;
                     landerRigidbody2D.AddTorque(turnSpeed * Time.deltaTime);
