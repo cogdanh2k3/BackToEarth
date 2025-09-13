@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GameInput : MonoBehaviour
@@ -6,11 +7,20 @@ public class GameInput : MonoBehaviour
 
     private InputActions inputAction;
 
+    public event EventHandler OnMenuButtonPressed;
+
     private void Awake()
     {
         instance = this;
         inputAction = new InputActions();
         inputAction.Enable();
+
+        inputAction.Player.Menu.performed += Menu_performed;
+    }
+
+    private void Menu_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnMenuButtonPressed?.Invoke(this, EventArgs.Empty);
     }
 
     private void OnDestroy()
