@@ -309,6 +309,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 724556184}
   m_CullTransparentMesh: 1
+--- !u!1001 &1241832043
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5177821814427409380, guid: 13b5d6a77644ef343bbc139bc0e915e6, type: 3}
+      propertyPath: m_Name
+      value: MusicManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7586940475294584637, guid: 13b5d6a77644ef343bbc139bc0e915e6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7586940475294584637, guid: 13b5d6a77644ef343bbc139bc0e915e6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7586940475294584637, guid: 13b5d6a77644ef343bbc139bc0e915e6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7586940475294584637, guid: 13b5d6a77644ef343bbc139bc0e915e6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7586940475294584637, guid: 13b5d6a77644ef343bbc139bc0e915e6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7586940475294584637, guid: 13b5d6a77644ef343bbc139bc0e915e6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7586940475294584637, guid: 13b5d6a77644ef343bbc139bc0e915e6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7586940475294584637, guid: 13b5d6a77644ef343bbc139bc0e915e6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7586940475294584637, guid: 13b5d6a77644ef343bbc139bc0e915e6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7586940475294584637, guid: 13b5d6a77644ef343bbc139bc0e915e6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 13b5d6a77644ef343bbc139bc0e915e6, type: 3}
 --- !u!1 &1309619728
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +423,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: GAME OVER
+  m_text: GAME FINISHED
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 30fd7f1dc1df39b4ba461abbf37b996a, type: 2}
   m_sharedMaterial: {fileID: -6917498455059095038, guid: 30fd7f1dc1df39b4ba461abbf37b996a, type: 2}
@@ -375,8 +432,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4282269397
-  m_fontColor: {r: 0.83396226, g: 0.2438945, b: 0.2438945, a: 1}
+    rgba: 4279828224
+  m_fontColor: {r: 0, g: 1, b: 0.094326735, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1059,3 +1116,4 @@ SceneRoots:
   - {fileID: 2082547746}
   - {fileID: 1939138432}
   - {fileID: 1723567891}
+  - {fileID: 1241832043}
