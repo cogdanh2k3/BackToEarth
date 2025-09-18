@@ -36,7 +36,8 @@ public class Lander : MonoBehaviour
         Success,
         WrongArea,
         TooSteep,
-        TooFast
+        TooFast,
+        BeShot
     }
 
     public enum State
@@ -115,19 +116,13 @@ public class Lander : MonoBehaviour
                 break;
             case State.GameOver:
                 break;
-        }
-
-        
-
-        
+        }      
     }
 
     private void OnCollisionEnter2D(Collision2D collision2D)
     {
         if (!collision2D.gameObject.TryGetComponent(out LandingPan landingPan))
         {
-            Debug.Log("Crashed on the Terrain!");
-
             OnLanded?.Invoke(this, new OnLandedEventArgs
             {
                 landingType = LandingType.WrongArea,
@@ -138,7 +133,21 @@ public class Lander : MonoBehaviour
             });
             SetState(State.GameOver);
             return;
+        }
 
+        if(collision2D.gameObject.TryGetComponent(out TurretBullet turretBullet))
+        {
+            turretBullet.DestroySelf();   
+            OnLanded?.Invoke(this, new OnLandedEventArgs
+            {
+                landingType = LandingType.BeShot,
+                score = 0,
+                scoreMultiplier = 0,
+                landingSpeed = 0,
+                landingAngle = 0
+            });
+            SetState(State.GameOver);
+            return;
         }
 
         float softLandingVelocityMagnitude = 4f;

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sand_04_roughness_0: -3312036069578120128
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

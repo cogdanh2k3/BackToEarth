@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sand_04_metallic_0: 3200803631213324994
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

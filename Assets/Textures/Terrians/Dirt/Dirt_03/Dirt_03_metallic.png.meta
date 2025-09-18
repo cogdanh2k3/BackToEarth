@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Dirt_03_metallic_0: -2996684382423730584
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

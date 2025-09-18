@@ -32,6 +32,7 @@ public class LanderVisuals : MonoBehaviour
     {
         switch (e.landingType)
         {
+            case Lander.LandingType.BeShot:
             case Lander.LandingType.TooFast:
             case Lander.LandingType.TooSteep:
             case Lander.LandingType.WrongArea:

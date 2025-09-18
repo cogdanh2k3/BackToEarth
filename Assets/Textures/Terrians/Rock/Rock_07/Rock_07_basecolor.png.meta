@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Rock_07_basecolor_0: 7946705926364517986
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

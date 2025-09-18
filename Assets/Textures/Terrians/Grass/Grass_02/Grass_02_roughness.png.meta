@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Grass_02_roughness_0: 541950283614625626
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

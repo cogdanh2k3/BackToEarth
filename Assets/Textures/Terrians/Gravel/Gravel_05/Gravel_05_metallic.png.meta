@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Gravel_05_metallic_0: -5091013236474360908
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -4090,7 +4090,7 @@ GameObject:
   - component: {fileID: 1615551062}
   m_Layer: 0
   m_Name: Lander
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4652,6 +4652,7 @@ MonoBehaviour:
   gameLevelList:
   - {fileID: 7178242696501824519, guid: 9fe1c84c362d21843b521bf207cbc937, type: 3}
   - {fileID: 7178242696501824519, guid: 8cc2dc66328d50c4587923ebbed7bb22, type: 3}
+  - {fileID: 7178242696501824519, guid: 4eafaeaeb1b8b994881a7259dae54311, type: 3}
   cinemachineCamera: {fileID: 902283498}
 --- !u!4 &1845305697
 Transform:

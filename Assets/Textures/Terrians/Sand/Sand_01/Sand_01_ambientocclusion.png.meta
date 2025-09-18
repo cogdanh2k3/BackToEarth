@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sand_01_ambientocclusion_0: -6716469425601806455
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Rock_04_ambientocclusion_0: 5046101450846786489
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

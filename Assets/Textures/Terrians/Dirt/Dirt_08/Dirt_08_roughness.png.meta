@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Dirt_08_roughness_0: -8820726962122170575
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

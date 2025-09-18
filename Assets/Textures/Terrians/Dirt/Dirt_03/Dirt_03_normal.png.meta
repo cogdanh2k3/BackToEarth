@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Dirt_03_normal_0: 2094566034878458644
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

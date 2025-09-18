@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Rocky_01_height_0: 4093610960597078177
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

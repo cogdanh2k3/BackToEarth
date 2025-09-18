@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      bumpy_sky-sunset_01-1024x512_0: 218112868696413497
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

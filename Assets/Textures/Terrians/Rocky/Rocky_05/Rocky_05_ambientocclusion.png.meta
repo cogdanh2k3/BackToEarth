@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Rocky_05_ambientocclusion_0: 2067204060408777121
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

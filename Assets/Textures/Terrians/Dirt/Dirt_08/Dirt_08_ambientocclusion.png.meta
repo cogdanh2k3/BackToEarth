@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Dirt_08_ambientocclusion_0: 587691730690946805
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

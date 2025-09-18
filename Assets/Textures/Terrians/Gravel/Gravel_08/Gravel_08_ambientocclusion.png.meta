@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Gravel_08_ambientocclusion_0: -7315619966622040146
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Tex_AlienGrowth_img_0: 5885333917512864331
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
